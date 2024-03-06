@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Platform, StatusBar, View, Text } from "react-native";
 
+import Prac from "./apps/screens/Prac";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Prac />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    backgroundColor: "#fff",
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: "center",
+    // alignItems: "center",
+  },
+  border: {
+    text: {
+      fontSize: 30,
+      fontFamily: "Roboto",
+      color: "tomato",
+    },
   },
 });
