@@ -5,6 +5,7 @@ import { LineSeperator } from "../component/LineSeperator";
 import { ListItemDeleteAction } from "../component/ListItemDeleteAction";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BaseScreen } from "./Base";
+import { Icon } from "../component/Icon";
 
 const initialMessages = [
   {
@@ -23,7 +24,7 @@ const initialMessages = [
     id: 3,
     title: "Title Title Title",
     des: "Description",
-    image: require("../assets/adaptive-icon.png"),
+    // image: require("../assets/adaptive-icon.png"),
   },
 ];
 export default function Prac(props) {
@@ -53,6 +54,7 @@ export default function Prac(props) {
                   onPress={() => handleDeleteMessages(item)}
                 />
               )}
+              IconComponent={<Icon />}
             />
           )}
           ItemSeparatorComponent={LineSeperator}
