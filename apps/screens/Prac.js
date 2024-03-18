@@ -10,8 +10,9 @@ import { Icon } from "../component/Icon";
 const initialMessages = [
   {
     id: 1,
-    title: "Title",
-    des: "Description Description Description",
+    title:
+      "Title Description Description Description Description Description Description",
+    des: "Description Description Description Description Description Description Description Description Description Description Description Description",
     image: require("../assets/lvb.jpg"),
   },
   {
@@ -24,10 +25,10 @@ const initialMessages = [
     id: 3,
     title: "Title Title Title",
     des: "Description",
-    // image: require("../assets/adaptive-icon.png"),
+    image: require("../assets/favicon.png"),
   },
 ];
-export default function Prac(props) {
+export default function Prac() {
   const [messages, setMessages] = useState(initialMessages);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -54,7 +55,7 @@ export default function Prac(props) {
                   onPress={() => handleDeleteMessages(item)}
                 />
               )}
-              IconComponent={<Icon />}
+              // IconComponent={<Icon />}
             />
           )}
           ItemSeparatorComponent={LineSeperator}

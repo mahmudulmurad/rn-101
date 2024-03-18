@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AppPicker } from "./apps/component/AppPicker";
 import { Login } from "./apps/screens/Login";
 import { NewListing } from "./apps/screens/NewListing";
+import Prac from "./apps/screens/Prac";
 
 const categories = [
   { label: "Furniture", value: 1 },
@@ -33,6 +34,7 @@ export default function App() {
       /> */}
       {/* <Login /> */}
       <NewListing />
+      {/* <Prac /> */}
     </View>
   );
 }

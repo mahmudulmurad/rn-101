@@ -8,13 +8,14 @@ import {
 } from "../component/form";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
+import { CategoryPickerItem } from "../component/CategoryPickerItem";
 
 const categories = [
-  { label: "Furniture", value: 1 },
-  { label: "Mobile", value: 2 },
-  { label: "Clothing", value: 3 },
-  { label: "Books", value: 4 },
-  { label: "Devices", value: 5 },
+  { label: "Furniture", value: 1, bgColor: "red", icon: "apps" },
+  { label: "Mobile", value: 2, bgColor: "green", icon: "email" },
+  { label: "Clothing", value: 3, bgColor: "blue", icon: "lock" },
+  { label: "Books", value: 4, bgColor: "red", icon: "apps" },
+  { label: "Devices", value: 5, bgColor: "red", icon: "apps" },
 ];
 
 const formValidation = Yup.object().shape({
@@ -31,8 +32,8 @@ export const NewListing = () => {
         initialValues={{
           title: "",
           price: "",
-          categorie: null,
           description: "",
+          category: null,
         }}
         onSubmit={(values) => console.log(values)}
         validationSchema={formValidation}
@@ -51,9 +52,11 @@ export const NewListing = () => {
           maxLength={8}
         />
         <AppFormPicker
-          items={categories}
           name="category"
           placeholder="Category"
+          categories={categories}
+          PickerItemComponent={CategoryPickerItem}
+          numberOfColumns={3}
         />
         <AppFormFiled
           name="description"

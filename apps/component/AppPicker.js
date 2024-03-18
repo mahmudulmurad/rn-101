@@ -13,9 +13,10 @@ export const AppPicker = ({
   placeholder,
   selectedItem,
   onSelectItem,
+  PickerItemComponent = PickerItem,
+  numberOfColumns,
 }) => {
   const [show, setShow] = useState(false);
-
   const handlePickedItem = (data) => {
     setShow(false);
     onSelectItem(data);
@@ -49,14 +50,14 @@ export const AppPicker = ({
       <Modal visible={show} animationType="slide">
         <BaseScreen>
           <Button title="Close" onPress={() => setShow(false)} />
-
           <FlatList
             data={categories}
-            keyExtractor={(item) => item.value.toString()}
-            renderItem={(item) => (
-              <PickerItem
-                label={item?.label}
-                onPress={() => handlePickedItem(item)}
+            keyExtractor={(one) => one.value.toString()}
+            numColumns={numberOfColumns}
+            renderItem={({ one }) => (
+              <PickerItemComponent
+                one={one}
+                onPress={() => handlePickedItem(one)}
               />
             )}
           />
