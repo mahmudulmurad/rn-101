@@ -22,7 +22,7 @@ const items = [
   { label: "BioHazard", value: 8, bgColor: "#22C299", icon: "biohazard" },
   { label: "Battery", value: 9, bgColor: "#3E381B", icon: "battery" },
   {
-    label: "Compass Rose",
+    label: "Compass",
     value: 10,
     bgColor: "#136270",
     icon: "compass-rose",

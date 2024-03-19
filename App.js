@@ -5,6 +5,7 @@ import { AppPicker } from "./apps/component/AppPicker";
 import { Login } from "./apps/screens/Login";
 import { NewListing } from "./apps/screens/NewListing";
 import Prac from "./apps/screens/Prac";
+import { ImagePickerScreen } from "./apps/screens/ImagePicker";
 
 const categories = [
   { label: "Furniture", value: 1 },
@@ -33,8 +34,9 @@ export default function App() {
         categories={categories}
       /> */}
       {/* <Login /> */}
-      <NewListing />
+      {/* <NewListing /> */}
       {/* <Prac /> */}
+      <ImagePickerScreen />
     </View>
   );
 }
