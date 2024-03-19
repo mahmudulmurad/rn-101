@@ -4,7 +4,7 @@ import { AppPicker } from "../AppPicker";
 import { ErrorText } from "./ErrorText";
 
 export const AppFormPicker = ({
-  categories,
+  items,
   name,
   placeholder,
   PickerItemComponent,
@@ -14,10 +14,10 @@ export const AppFormPicker = ({
   return (
     <>
       <AppPicker
-        categories={categories}
+        items={items}
         placeholder={placeholder}
         selectedItem={values[name]}
-        onSelectItem={(item) => setFieldValue(name, item?.label)}
+        onSelectItem={(item) => setFieldValue(name, item)}
         PickerItemComponent={PickerItemComponent}
         numberOfColumns={numberOfColumns}
       />

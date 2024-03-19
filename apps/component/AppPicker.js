@@ -9,7 +9,7 @@ import { BaseScreen } from "../screens/Base";
 
 export const AppPicker = ({
   icon,
-  categories,
+  items,
   placeholder,
   selectedItem,
   onSelectItem,
@@ -51,13 +51,13 @@ export const AppPicker = ({
         <BaseScreen>
           <Button title="Close" onPress={() => setShow(false)} />
           <FlatList
-            data={categories}
-            keyExtractor={(one) => one.value.toString()}
+            data={items}
+            keyExtractor={(item) => item.value.toString()}
             numColumns={numberOfColumns}
-            renderItem={({ one }) => (
+            renderItem={({ item }) => (
               <PickerItemComponent
-                one={one}
-                onPress={() => handlePickedItem(one)}
+                one={item}
+                onPress={() => handlePickedItem(item)}
               />
             )}
           />
