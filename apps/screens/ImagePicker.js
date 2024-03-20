@@ -20,7 +20,7 @@ export const ImagePickerScreen = () => {
     try {
       const result = await ImagePicker.launchImageLibraryAsync();
       if (!result.canceled) {
-        setUrl(result.uri);
+        setUrl(result.assets[0].uri);
       }
     } catch (error) {
       console.log("Something went wrong", error);
@@ -30,11 +30,15 @@ export const ImagePickerScreen = () => {
   return (
     <View style={styles.container}>
       <Button title="Select Image" onPress={selectImage} />
-      <Image source={{ uri: url }} width={200} height={200} />
+      <Image source={{ uri: url }} style={styles.image} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+  image: {
+    width: 200,
+    height: 200,
+  },
 });
