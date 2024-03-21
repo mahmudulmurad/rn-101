@@ -10,6 +10,7 @@ import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 import { CategoryPickerItem } from "../component/CategoryPickerItem";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { AppFormImagePicker } from "../component/form/AppFormImagePicker";
 
 const items = [
   { label: "Furniture", value: 1, bgColor: "red", icon: "apps" },
@@ -34,8 +35,9 @@ const items = [
 const formValidation = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
   price: Yup.number().required().min(1).max(10000).label("Price"),
-  category: Yup.object().required().nullable().label("Category"),
+  category: Yup.object().required().label("Category"),
   description: Yup.string().label("Description"),
+  images: Yup.array().min(1, "Please select at least one image"),
 });
 
 export const NewListing = () => {
@@ -48,10 +50,12 @@ export const NewListing = () => {
             price: "",
             description: "",
             category: null,
+            images: [],
           }}
           onSubmit={(values) => console.log(values)}
           validationSchema={formValidation}
         >
+          <AppFormImagePicker name="images" />
           <AppFormFiled
             name="title"
             placeholder="Title"
