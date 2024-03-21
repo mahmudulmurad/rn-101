@@ -11,6 +11,7 @@ import * as Yup from "yup";
 import { CategoryPickerItem } from "../component/CategoryPickerItem";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { AppFormImagePicker } from "../component/form/AppFormImagePicker";
+import useLocation from "../hooks/Location";
 
 const items = [
   { label: "Furniture", value: 1, bgColor: "red", icon: "apps" },
@@ -41,6 +42,7 @@ const formValidation = Yup.object().shape({
 });
 
 export const NewListing = () => {
+  const location = useLocation();
   return (
     <BaseScreen style={styles.container}>
       <GestureHandlerRootView>
@@ -52,7 +54,7 @@ export const NewListing = () => {
             category: null,
             images: [],
           }}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={(values) => console.log(location)}
           validationSchema={formValidation}
         >
           <AppFormImagePicker name="images" />
