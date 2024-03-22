@@ -5,6 +5,7 @@ import { ListItem } from "../component/ListItem";
 import colors from "../config/colors";
 import { Icon } from "../component/Icon";
 import { LineSeperator } from "../component/LineSeperator";
+import Routes from "../navigation/Routes";
 
 const menuItems = [
   {
@@ -13,6 +14,7 @@ const menuItems = [
       name: "format-list-bulleted",
       backgroundColor: colors.primary,
     },
+    targetScreen: "Listing",
   },
   {
     title: " My Messeges",
@@ -20,9 +22,10 @@ const menuItems = [
       name: "email",
       backgroundColor: colors.secondery,
     },
+    targetScreen: Routes.Messages,
   },
 ];
-export const Account = () => {
+export const Account = ({ navigation }) => {
   return (
     <BaseScreen style={styles.screen}>
       <View style={styles.header}>
@@ -40,7 +43,7 @@ export const Account = () => {
             <ListItem
               title={item.title}
               key={index}
-              onPress={() => console.log("Tapped")}
+              onPress={() => navigation.navigate(item.targetScreen)}
               IconComponent={
                 <Icon
                   name={item.icon.name}

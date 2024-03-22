@@ -1,15 +1,23 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 
-export const Card = ({ title, description, image }) => {
+export const Card = ({ title, description, image, onPress }) => {
   return (
-    <View>
-      <Image source={image} style={styles.image} />
-      <View style={styles.text}>
-        <Text style={styles.text.title}>{title}</Text>
-        <Text style={styles.text.description}>{description}</Text>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View>
+        <Image source={image} style={styles.image} />
+        <View style={styles.text}>
+          <Text style={styles.text.title}>{title}</Text>
+          <Text style={styles.text.description}>{description}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

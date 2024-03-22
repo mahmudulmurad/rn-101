@@ -3,6 +3,7 @@ import { BaseScreen } from "./Base";
 import { FlatList, StyleSheet } from "react-native";
 import { Card } from "../component/Card";
 import colors from "../config/colors";
+import Routes from "../navigation/Routes";
 
 const listItems = [
   {
@@ -36,7 +37,7 @@ const listItems = [
     image: require("../assets/lvb.jpg"),
   },
 ];
-export const Listing = () => {
+export const Listing = ({ navigation }) => {
   return (
     <BaseScreen style={styles.container}>
       <FlatList
@@ -48,6 +49,7 @@ export const Listing = () => {
             title={item.title}
             description={"$" + item.price}
             image={item.image}
+            onPress={() => navigation.navigate(Routes.Listing_Details, item)}
           />
         )}
       />
