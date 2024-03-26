@@ -1,14 +1,11 @@
 import * as Location from "expo-location";
-import * as Permissions from "expo-permissions";
 import { useEffect, useState } from "react";
 
 export default useLocation = () => {
   const [location, setLocation] = useState();
   const userPermissionAndLocation = async () => {
     try {
-      const { granted } = await Permissions.askAsync(
-        Permissions.LOCATION_BACKGROUND
-      );
+      const { granted } = await Location.requestForegroundPermissionsAsync();
       if (!granted) return;
       const {
         coords: { latitude, longitude },

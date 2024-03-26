@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  TouchableWithoutFeedback,
-  Alert,
-} from "react-native";
+import { View, StyleSheet, Image, Alert } from "react-native";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import {
+  GestureHandlerRootView,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 
 export const ImageInput = ({ imageUri, onChangeImage }) => {
   const getCameraPermission = async () => {
@@ -30,8 +28,7 @@ export const ImageInput = ({ imageUri, onChangeImage }) => {
         {
           text: "Yes",
           onPress: () => {
-            onChangeImage(null);
-            console.log("tapped");
+            onChangeImage(imageUri);
           },
         },
         { text: "No" },
@@ -53,18 +50,22 @@ export const ImageInput = ({ imageUri, onChangeImage }) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
-      <View style={styles.container}>
-        {!imageUri && (
-          <MaterialCommunityIcons
-            name="camera"
-            color={colors.medium}
-            size={40}
-          />
-        )}
-        {imageUri && <Image source={imageUri} style={styles.image} />}
-      </View>
-    </TouchableWithoutFeedback>
+    <GestureHandlerRootView>
+      <TouchableWithoutFeedback onPress={handlePress}>
+        <View style={styles.container}>
+          {!imageUri && (
+            <MaterialCommunityIcons
+              name="camera"
+              color={colors.medium}
+              size={40}
+            />
+          )}
+          {imageUri && (
+            <Image source={{ uri: imageUri }} style={styles.image} />
+          )}
+        </View>
+      </TouchableWithoutFeedback>
+    </GestureHandlerRootView>
   );
 };
 

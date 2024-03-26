@@ -41,7 +41,7 @@ const AppBottomTabNavigator = () => {
         })}
       />
       <Tab.Screen
-        name="Account"
+        name="Settings"
         component={AccountNavigator}
         options={{
           tabBarIcon: ({ size }) => (

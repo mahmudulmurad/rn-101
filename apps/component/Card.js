@@ -1,43 +1,42 @@
 import React from "react";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
+import colors from "../config/colors";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export const Card = ({ title, description, image, onPress }) => {
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
-      <View>
-        <Image source={image} style={styles.image} />
-        <View style={styles.text}>
-          <Text style={styles.text.title}>{title}</Text>
-          <Text style={styles.text.description}>{description}</Text>
-        </View>
+    <TouchableWithoutFeedback onPress={onPress} style={styles.cardContainer}>
+      <Image source={image} style={styles.image} />
+
+      <View style={styles.textContainer}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.description}>{description}</Text>
       </View>
     </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
+  cardContainer: {
+    borderRadius: 5,
+    backgroundColor: colors.white,
+    marginBottom: 10,
+    elevation: 3, // Added elevation for shadow on Android
+  },
   image: {
     width: "100%",
-    height: "150px",
-    borderRadius: "5px",
-    objectFit: "cover",
-    marginBottom: "10px",
+    height: 150, // Removed "px" from height
+    borderRadius: 5,
+    resizeMode: "cover", // Changed objectFit to resizeMode
   },
-  text: {
-    marginBottom: "10px",
-    marginLeft: 10,
-    title: {
-      fontWeight: "500",
-      marginBottom: "10px",
-    },
-    description: {
-      color: "tomato",
-    },
+  textContainer: {
+    padding: 10,
+  },
+  title: {
+    fontWeight: "500",
+    marginBottom: 5,
+  },
+  description: {
+    color: colors.tomato,
   },
 });

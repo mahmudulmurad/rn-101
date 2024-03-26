@@ -16,7 +16,7 @@ export const CategoryPickerItem = ({ one, onPress }) => {
 
 export const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     paddingVertical: 15,
     alignItems: "center",
     width: "100%",
@@ -24,6 +24,5 @@ export const styles = StyleSheet.create({
   text: {
     marginTop: 5,
     textAlign: "center",
-    flexShrink: 1,
   },
 });

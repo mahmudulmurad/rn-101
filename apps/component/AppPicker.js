@@ -71,15 +71,17 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyle.colors.light,
     borderRadius: 25,
     flexDirection: "row",
-    width: "100%",
     padding: 15,
     marginVertical: 10,
   },
-  text: {
-    flex: 1,
-  },
-  placeholder: { flex: 1, color: defaultStyle.colors.medium },
   icon: {
     marginRight: 10,
+  },
+  placeholder: {
+    color: defaultStyle.colors.medium,
+    flex: 1,
+  },
+  text: {
+    flex: 1,
   },
 });

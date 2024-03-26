@@ -4,6 +4,7 @@ import { BaseScreen } from "./Base";
 import { ListItem } from "../component/ListItem";
 import { ListItemDeleteAction } from "../component/ListItemDeleteAction";
 import { LineSeperator } from "../component/LineSeperator";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const initialMessages = [
   {
@@ -32,33 +33,35 @@ function Messages(props) {
 
   return (
     <BaseScreen>
-      <FlatList
-        data={messages}
-        keyExtractor={(message) => message.id.toString()}
-        renderItem={({ item }) => (
-          <ListItem
-            title={item.title}
-            description={item.description}
-            image={item.image}
-            onPress={() => console.log("Message selected", item)}
-            renderRightActions={() => (
-              <ListItemDeleteAction onPress={() => handleDelete(item)} />
-            )}
-          />
-        )}
-        ItemSeparatorComponent={LineSeperator}
-        refreshing={refreshing}
-        onRefresh={() => {
-          setMessages([
-            {
-              id: 2,
-              title: "T2",
-              description: "D2",
-              image: require("../assets/lvb.jpg"),
-            },
-          ]);
-        }}
-      />
+      <GestureHandlerRootView>
+        <FlatList
+          data={messages}
+          keyExtractor={(message) => message.id.toString()}
+          renderItem={({ item }) => (
+            <ListItem
+              title={item.title}
+              description={item.description}
+              image={item.image}
+              onPress={() => console.log("Message selected", item)}
+              renderRightActions={() => (
+                <ListItemDeleteAction onPress={() => handleDelete(item)} />
+              )}
+            />
+          )}
+          ItemSeparatorComponent={LineSeperator}
+          refreshing={refreshing}
+          onRefresh={() => {
+            setMessages([
+              {
+                id: 2,
+                title: "T2",
+                description: "D2",
+                image: require("../assets/lvb.jpg"),
+              },
+            ]);
+          }}
+        />
+      </GestureHandlerRootView>
     </BaseScreen>
   );
 }

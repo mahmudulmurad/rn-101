@@ -3,12 +3,13 @@ import { View, Image, StyleSheet } from "react-native";
 import colors from "../config/colors";
 import { ListItem } from "../component/ListItem";
 import { AppText } from "../component/AppText";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 function ListingDetails({ route }) {
   const listing = route.params;
 
   return (
-    <View>
+    <GestureHandlerRootView>
       <Image style={styles.image} source={listing.image} />
       <View style={styles.detailsContainer}>
         <AppText style={styles.title}>{listing.title}</AppText>
@@ -21,7 +22,7 @@ function ListingDetails({ route }) {
           />
         </View>
       </View>
-    </View>
+    </GestureHandlerRootView>
   );
 }
 

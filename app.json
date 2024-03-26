@@ -25,6 +25,14 @@
     },
     "web": {
       "favicon": "./apps/assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow PlayNative to use your location."
+        }
+      ]
+    ]
   }
 }
