@@ -6,7 +6,7 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 export const Card = ({ title, description, image, onPress }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress} style={styles.cardContainer}>
-      <Image source={image} style={styles.image} />
+      <Image source={{ uri: image }} style={styles.image} />
 
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>

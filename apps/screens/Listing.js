@@ -1,56 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BaseScreen } from "./Base";
-import { FlatList, StyleSheet } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
 import { Card } from "../component/Card";
 import colors from "../config/colors";
 import Routes from "../navigation/Routes";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import listingApi from "../api/listing";
+import { AppText } from "../component/AppText";
+import { AppButton } from "../component/AppButton";
 
-const listItems = [
-  {
-    id: 1,
-    title: "A master for sale.!",
-    price: 999,
-    image: require("../assets/adaptive-icon.png"),
-  },
-  {
-    id: 2,
-    title: "A master for sale.!",
-    price: 100,
-    image: require("../assets/lvb.jpg"),
-  },
-  {
-    id: 3,
-    title: "A master for sale.!",
-    price: 350,
-    image: require("../assets/d.jpeg"),
-  },
-  {
-    id: 4,
-    title: "A master for sale.!",
-    price: 500,
-    image: require("../assets/lvb.jpg"),
-  },
-  {
-    id: 5,
-    title: "A master for sale.!",
-    price: 600,
-    image: require("../assets/d.jpeg"),
-  },
-];
 export const Listing = ({ navigation }) => {
+  const [items, setItems] = useState([]);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const loadItems = async () => {
+    setLoading(true);
+    const res = await listingApi.getListings();
+    setLoading(false);
+
+    if (!res.ok) return setError(true);
+
+    setError(false);
+    setItems(res.data);
+  };
+
+  useEffect(() => {
+    loadItems();
+  }, []);
+
   return (
     <BaseScreen style={styles.container}>
+      {error && (
+        <>
+          <AppText> Something went wrong!</AppText>
+          <AppButton title="Retry" onPress={loadItems} />
+        </>
+      )}
+      <ActivityIndicator animating={loading} />
       <GestureHandlerRootView>
         <FlatList
-          data={listItems}
+          data={items}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ index, item }) => (
             <Card
               key={index}
               title={item.title}
-              description={"$" + item.price}
-              image={item.image}
+              description={"$" + item.id}
+              image={item.url}
               onPress={() => navigation.navigate(Routes.Listing_Details, item)}
             />
           )}

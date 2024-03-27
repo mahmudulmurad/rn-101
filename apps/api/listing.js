@@ -1,6 +1,6 @@
 import client from "./client";
 
-const slug = "/listing";
+const slug = "/photos";
 
 const getListings = () => client.get(slug);
 
