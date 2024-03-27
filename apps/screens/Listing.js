@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BaseScreen } from "./Base";
-import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import { Card } from "../component/Card";
 import colors from "../config/colors";
 import Routes from "../navigation/Routes";
@@ -8,22 +8,16 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import listingApi from "../api/listing";
 import { AppText } from "../component/AppText";
 import { AppButton } from "../component/AppButton";
+import { LoadingIndicator } from "../component/LoadingIndicator";
+import useApiWorker from "../hooks/API/";
 
 export const Listing = ({ navigation }) => {
-  const [items, setItems] = useState([]);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const loadItems = async () => {
-    setLoading(true);
-    const res = await listingApi.getListings();
-    setLoading(false);
-
-    if (!res.ok) return setError(true);
-
-    setError(false);
-    setItems(res.data);
-  };
+  const {
+    data: items,
+    error,
+    loading,
+    request: loadItems,
+  } = useApiWorker(listingApi.getListings);
 
   useEffect(() => {
     loadItems();
@@ -37,7 +31,7 @@ export const Listing = ({ navigation }) => {
           <AppButton title="Retry" onPress={loadItems} />
         </>
       )}
-      <ActivityIndicator animating={loading} />
+      <LoadingIndicator visible={loading} />
       <GestureHandlerRootView>
         <FlatList
           data={items}

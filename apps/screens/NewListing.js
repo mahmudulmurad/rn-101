@@ -12,6 +12,8 @@ import { CategoryPickerItem } from "../component/CategoryPickerItem";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { AppFormImagePicker } from "../component/form/AppFormImagePicker";
 import useLocation from "../hooks/Location";
+import listingApis from "../api/listing";
+import { UploadProgress } from "./UploadProgress";
 
 const items = [
   { label: "Furniture", value: 1, bgColor: "red", icon: "apps" },
@@ -42,9 +44,31 @@ const formValidation = Yup.object().shape({
 });
 
 export const NewListing = () => {
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
   const location = useLocation();
+
+  const handleSubmit = async (values, { resetForm }) => {
+    setProgress(0);
+    setUploadVisible(true);
+    const res = await listingApis.addListing({ ...values, location }, (data) =>
+      setProgress(data)
+    );
+
+    if (!res.ok) {
+      setUploadVisible(false);
+      return alert("Something went wrong");
+    }
+    resetForm();
+  };
+
   return (
     <BaseScreen style={styles.container}>
+      <UploadProgress
+        onFinished={() => setUploadVisible(false)}
+        progress={progress}
+        visible={uploadVisible}
+      />
       <GestureHandlerRootView>
         <AppForm
           initialValues={{
@@ -54,7 +78,7 @@ export const NewListing = () => {
             category: null,
             images: [],
           }}
-          onSubmit={(values) => console.log(location)}
+          onSubmit={handleSubmit}
           validationSchema={formValidation}
         >
           <AppFormImagePicker name="images" />
