@@ -7,8 +7,8 @@
     "icon": "./apps/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./apps/assets/splash.png",
-      "resizeMode": "contain",
+      "image": "./apps/assets/lvb.jpg",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
@@ -32,7 +32,8 @@
         {
           "locationAlwaysAndWhenInUsePermission": "Allow PlayNative to use your location."
         }
-      ]
+      ],
+      "expo-secure-store"
     ]
   }
 }

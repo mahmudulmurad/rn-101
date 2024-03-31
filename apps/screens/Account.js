@@ -7,6 +7,8 @@ import { Icon } from "../component/Icon";
 import { LineSeperator } from "../component/LineSeperator";
 import Routes from "../navigation/Routes";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import authStorage from "../auth/Store";
+import useAuth from "../auth/useAuth";
 
 const menuItems = [
   {
@@ -18,7 +20,10 @@ const menuItems = [
     targetScreen: Routes.Messages,
   },
 ];
+
 export const Account = ({ navigation }) => {
+  const { logOut } = useAuth();
+
   return (
     <BaseScreen style={styles.screen}>
       <GestureHandlerRootView>
@@ -63,6 +68,7 @@ export const Account = ({ navigation }) => {
           <ListItem
             title="Logout"
             IconComponent={<Icon name="logout" size={35} bgColor="#ffe66d" />}
+            onPress={() => logOut()}
           />
         </View>
       </GestureHandlerRootView>

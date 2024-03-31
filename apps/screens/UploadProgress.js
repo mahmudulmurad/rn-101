@@ -8,7 +8,6 @@ export const UploadProgress = ({ progress, visible = false, onFinished }) => {
   return (
     <Modal visible={visible}>
       <View style={styles.container}>
-        {" "}
         {progress < 1 ? (
           <Progress.Bar
             progress={progress}
