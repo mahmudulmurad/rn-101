@@ -10,6 +10,8 @@ import {
 } from "../component/form";
 import authApi from "../api/auth";
 import useAuth from "../auth/useAuth";
+import useApiWorker from "../hooks/API";
+import { LoadingIndicator } from "../component/LoadingIndicator";
 
 const formValidation = Yup.object().shape({
   username: Yup.string().required().label("Name"),
@@ -17,45 +19,50 @@ const formValidation = Yup.object().shape({
 });
 
 export const Login = () => {
-  const { logIn } = useAuth();
+  const userAuth = useAuth();
+  const loginApi = useApiWorker(authApi.login);
+
   const [failedStatus, setFailedStatus] = useState(false);
 
   const handleSubmit = async ({ username, password }) => {
-    const res = await authApi.login(username, password);
+    const res = await loginApi.request(username, password);
 
     if (!res.ok) setFailedStatus(true);
 
-    logIn(res?.data?.accessToken);
+    userAuth.logIn(res?.data?.accessToken);
   };
 
   return (
-    <BaseScreen style={styles.container}>
-      <Image source={require("../assets/lvb.jpg")} style={styles.logo} />
-      <AppForm
-        initialValues={{ username: "", password: "" }}
-        onSubmit={handleSubmit}
-        validationSchema={formValidation}
-      >
-        <ErrorText error="Invalid username/password" visible={failedStatus} />
+    <>
+      <LoadingIndicator visible={loginApi?.loading} />
+      <BaseScreen style={styles.container}>
+        <Image source={require("../assets/lvb.jpg")} style={styles.logo} />
+        <AppForm
+          initialValues={{ username: "", password: "" }}
+          onSubmit={handleSubmit}
+          validationSchema={formValidation}
+        >
+          <ErrorText error="Invalid username/password" visible={failedStatus} />
 
-        <AppFormFiled
-          autoCorrect={false}
-          icon="account"
-          name="username"
-          placeholder="Name"
-        />
+          <AppFormFiled
+            autoCorrect={false}
+            icon="account"
+            name="username"
+            placeholder="Name"
+          />
 
-        <AppFormFiled
-          name="password"
-          icon="lock"
-          placeholder="Password"
-          autoCapitalize="none"
-          autoCorrect={false}
-          secureTextEntry={true}
-        />
-        <AppFormSubmitButton title="Login" />
-      </AppForm>
-    </BaseScreen>
+          <AppFormFiled
+            name="password"
+            icon="lock"
+            placeholder="Password"
+            autoCapitalize="none"
+            autoCorrect={false}
+            secureTextEntry={true}
+          />
+          <AppFormSubmitButton title="Login" />
+        </AppForm>
+      </BaseScreen>
+    </>
   );
 };
 

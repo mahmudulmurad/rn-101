@@ -12,6 +12,8 @@ import {
 import authApi from "../api/auth";
 import { UploadProgress } from "./UploadProgress";
 import useAuth from "../auth/useAuth";
+import useApiWorker from "../hooks/API";
+import { LoadingIndicator } from "../component/LoadingIndicator";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required().label("Name"),
@@ -19,7 +21,9 @@ const validationSchema = Yup.object().shape({
 });
 
 export const Register = () => {
-  const { logIn } = useAuth();
+  const userAuth = useAuth();
+  const registerApi = useApiWorker(authApi.signup);
+
   const [failedStatus, setFailedStatus] = useState(false);
   const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -27,14 +31,14 @@ export const Register = () => {
   const handleSubmit = async ({ username, password }) => {
     setProgress(0);
     setUploadVisible(true);
-    const res = await authApi.signup(username, password);
+    const res = await registerApi.request(username, password);
 
     if (!res.ok) {
       setFailedStatus(true);
       setUploadVisible(false);
     }
 
-    logIn(res?.data?.accessToken);
+    userAuth.logIn(res?.data?.accessToken);
   };
 
   return (
@@ -44,6 +48,7 @@ export const Register = () => {
         progress={progress}
         visible={uploadVisible}
       />
+      <LoadingIndicator visible={registerApi?.loading} />
       <Image source={require("../assets/lvb.jpg")} style={styles.logo} />
 
       <AppForm

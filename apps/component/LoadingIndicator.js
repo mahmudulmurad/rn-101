@@ -1,6 +1,7 @@
 import React from "react";
 import LottieView from "lottie-react-native";
 import colors from "../config/colors";
+import { StyleSheet } from "react-native";
 
 export const LoadingIndicator = ({ visible = false }) => {
   if (!visible) return null;
@@ -14,8 +15,8 @@ export const LoadingIndicator = ({ visible = false }) => {
         width: "100%",
         height: "100%",
         backgroundColor: colors.white,
-        alignItems: "center",
-        justifyContent: "center",
+        zIndex: 1,
+        opacity: 0.5,
       }}
     />
   );
